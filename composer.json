@@ -2,6 +2,7 @@
     "name": "php-etl/howto",
     "type": "metapackage",
     "require": {
+        "php": ">=7.4",
         "php-etl/contracts": "^1.0@dev",
         "php-etl/pipeline": "^1.0@dev",
         "php-etl/bucket": "^1.0@dev",
@@ -9,13 +10,17 @@
         "php-etl/metadata": "^1.0@dev",
         "php-etl/fast-map-config": "^1.0@dev",
         "php-etl/promise": "^1.0@dev",
-        "php-etl/akeneo-expression-language": "^1.0@dev"
+        "php-etl/akeneo-expression-language": "^1.0@dev",
+        "php-etl/batch": "^1.0@dev"
     },
     "require-dev": {
-        "php-etl/phpspec-extension": "^1.0@dev"
+        "php-etl/phpspec-extension": "^1.0@dev",
+        "fzaninotto/faker": "^1.9@dev"
     },
     "autoload": {
-        "Howto\\": "src/"
+        "psr-4": {
+            "Howto\\": "src/"
+        }
     },
     "license": "MIT",
     "authors": [
