@@ -1,0 +1,53 @@
+version: '2'
+
+services:
+  blackfire:
+    image: blackfire/blackfire
+    environment:
+      - BLACKFIRE_SERVER_ID
+      - BLACKFIRE_SERVER_TOKEN
+
+  dbgp:
+    build:
+      context: './.docker/dbgp/'
+    ports:
+      - ${DBGP_PORT}:9001
+
+  sh:
+    image: kiboko/php:7.4-cli-blackfire
+    user: docker:docker
+    volumes:
+      - ./:/var/www/html
+      - cache:/var/www/html/var/cache
+      - $HOME/.ssh:/opt/docker/.ssh
+      - $HOME/.composer:/opt/docker/.composer/
+    environment:
+      - COMPOSER_AUTH
+      - COMPOSER_PROCESS_TIMEOUT
+      - BLACKFIRE_CLIENT_ID
+      - BLACKFIRE_CLIENT_TOKEN
+      - HOME=/var/www/html
+    command: [ "sleep", "31536000" ]
+    restart: "always"
+
+  sh-xdebug:
+    image: kiboko/php:7.4-cli-xdebug
+    user: docker:docker
+    volumes:
+      - ./:/var/www/html
+      - cache:/var/www/html/var/cache
+      - $HOME/.ssh:/opt/docker/.ssh
+      - $HOME/.composer:/opt/docker/.composer/
+    environment:
+      - COMPOSER_AUTH
+      - COMPOSER_PROCESS_TIMEOUT
+    command: [ "sleep", "31536000" ]
+    restart: "always"
+
+volumes:
+  cache:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "size=2048m,uid=1000,gid=1000"

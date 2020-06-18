@@ -1,0 +1,28 @@
+{
+    "name": "php-etl/howto",
+    "type": "metapackage",
+    "require": {
+        "php-etl/contracts": "^1.0@dev",
+        "php-etl/pipeline": "^1.0@dev",
+        "php-etl/bucket": "^1.0@dev",
+        "php-etl/fast-map": "^1.0@dev",
+        "php-etl/metadata": "^1.0@dev",
+        "php-etl/fast-map-config": "^1.0@dev",
+        "php-etl/promise": "^1.0@dev",
+        "php-etl/akeneo-expression-language": "^1.0@dev"
+    },
+    "require-dev": {
+        "php-etl/phpspec-extension": "^1.0@dev"
+    },
+    "autoload": {
+        "Howto\\": "src/"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Grégory Planchat",
+            "email": "gregory@kiboko.fr"
+        }
+    ],
+    "minimum-stability": "dev"
+}

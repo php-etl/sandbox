@@ -1,0 +1,5 @@
+alias up='docker-compose up -d'
+alias down='docker-compose down'
+alias composer='docker-compose exec sh composer'
+alias phpunit='docker-compose exec sh-xdebug vendor/bin/phpunit'
+alias phpspec='docker-compose exec sh-xdebug vendor/bin/phpspec'
