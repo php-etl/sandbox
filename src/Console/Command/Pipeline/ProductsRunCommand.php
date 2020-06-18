@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Howto\Console\Command\Pipeline;
 
+use Compiled\ProductSpaghettiMapper;
 use Howto\Flow\CallableTransformer;
 use Howto\Flow\GenericCSVExtractor;
 use Howto\Flow\LDJSONLoader;
@@ -16,7 +17,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class ProductsRunCommand extends Command
 {
     public static $defaultName = 'pipeline:products:run';
-
 
     protected function configure()
     {
@@ -42,42 +42,7 @@ final class ProductsRunCommand extends Command
                     ])
             )
             ->transform(
-                new CallableTransformer(function (array $item) {
-                    return [
-                        'sku' => $item['sku'],
-                        'name' => $item['name'] ?? null,
-                        'slug' => $item['slug'] ?? null,
-                        'shortDescription' => $item['shortDescription'] ?? null,
-                        'description' => $item['description'] ?? null,
-                        'price' => $item['price'] ?? null,
-                        'images' => [
-                            [
-                                'url' => $item['image_1-url'] ?? null,
-                                'code' => $item['image_1-code'] ?? null,
-                                'name' => $item['image_1-name'] ?? null,
-                                'slug' => $item['image_1-slug'] ?? null,
-                            ],
-                            [
-                                'url' => $item['image_2-url'] ?? null,
-                                'code' => $item['image_2-code'] ?? null,
-                                'name' => $item['image_2-name'] ?? null,
-                                'slug' => $item['image_2-slug'] ?? null,
-                            ],
-                            [
-                                'url' => $item['image_3-url'] ?? null,
-                                'code' => $item['image_3-code'] ?? null,
-                                'name' => $item['image_3-name'] ?? null,
-                                'slug' => $item['image_3-slug'] ?? null,
-                            ],
-                            [
-                                'url' => $item['image_4-url'] ?? null,
-                                'code' => $item['image_4-code'] ?? null,
-                                'name' => $item['image_4-name'] ?? null,
-                                'slug' => $item['image_4-slug'] ?? null,
-                            ],
-                        ],
-                    ];
-                })
+                new CallableTransformer(new ProductSpaghettiMapper())
             )
             ->load(
                 new LDJSONLoader(new \SplFileObject($sink, 'wb'))
