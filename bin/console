@@ -15,10 +15,6 @@ $app->addCommands([
         Command\FakeData\GenerateCommand::$defaultName
     ),
 
-    new Command\FastMap\CompileCommand(
-        Command\FastMap\CompileCommand::$defaultName
-    ),
-
     new Command\Pipeline\CustomersRunCommand(
         Command\Pipeline\CustomersRunCommand::$defaultName
     ),
