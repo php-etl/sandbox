@@ -18,6 +18,10 @@ $app->addCommands([
     new Command\Pipeline\CustomersRunCommand(
         Command\Pipeline\CustomersRunCommand::$defaultName
     ),
+
+    new Command\Pipeline\ProductsRunCommand(
+        Command\Pipeline\ProductsRunCommand::$defaultName
+    ),
 ]);
 
 $app->run(new ArgvInput($argv), new ConsoleOutput());
